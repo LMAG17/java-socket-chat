@@ -1,11 +1,13 @@
 package main;
 
-import main.UI.Chat;
+import main.Server.Server;
 import main.UI.UICreator;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
-        UICreator uiCreator = new UICreator();
-        uiCreator.showUI();
+    public static void main(String[] args) throws IOException {
+        new UICreator().showUI();
+        new Server().start(9999);
     }
 }

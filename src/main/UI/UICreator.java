@@ -9,29 +9,26 @@ public class UICreator {
     JFrame frame = new JFrame();
 
     public void setHeader() {
-        header.add(new JLabel("Origen"));
-        JTextField origin = new JTextField("9999");
-        header.add(origin);
-        header.add(new JLabel("Destino"));
-        JTextField destiny = new JTextField("8888");
-        header.add(destiny);
-        header.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
-        header.setLayout(new GridLayout(0, 2));
-        JButton button = new JButton("Nuevo chat");
+        header.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
+        header.setLayout(new GridLayout(0, 3));
+        header.add(new JLabel("Apodo"));
+        JTextField nameTextField = new JTextField();
+        header.add(nameTextField);
+        JButton button = new JButton("Unirse al server");
         button.addActionListener(e -> {
             new Thread(() -> {
                 Chat chat = new Chat();
-                chat.createChatWindow(Integer.parseInt(origin.getText()), Integer.parseInt(destiny.getText()));
+                chat.createChatWindow(nameTextField.getText());
             }).start();
         });
-        header.add(button);
+        header.add(button,2,2);
         window.add(header);
     }
 
     public void setWindow() {
         window.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         window.setLayout(new GridLayout(0, 1));
-        window.add(new JLabel("Pantalla envia los mensajes "));
+        window.add(new JLabel("Servidor poli"));
     }
 
     public void setFrame() {

@@ -13,12 +13,21 @@ public class ClientHandler implements Runnable {
     private final ArrayList<ClientHandler> clients;
     private String name = "poli";
 
+    /**
+     * ClientHandler constructor
+     * @param clientSocket socket del nuevo cliente
+     * @param serverClients clientes conectados al servidor
+     * @throws IOException posible error
+     */
     public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> serverClients) throws IOException {
         clients = serverClients;
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         out = new PrintWriter(clientSocket.getOutputStream(), true);
     }
 
+    /**
+     * run sobreescribe el metodo de la clase Runnable y se usa para escuchar las entradas enviadas por cada cliente
+     */
     @Override
     public void run() {
         try {
@@ -40,6 +49,10 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Toma el comando especifico para tomar el nombre del cliente
+     * @param command input crudo
+     */
     private void setName(String command) {
         String name = getCommandMessage(command);
         if (name != null && !name.equals("")) {
@@ -50,6 +63,10 @@ public class ClientHandler implements Runnable {
         sendMessageToAllServer("/all " + this.name + " se ha unido al server.");
     }
 
+    /**
+     * Metodo que sirve para enviar a cada uno de los clientes conectados un mensaje
+     * @param command input crudo
+     */
     private void sendMessageToAllServer(String command) {
         String message = getCommandMessage(command);
         if (message != null) {
@@ -59,6 +76,11 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Recibe el input en crudo y retorna el mensja sin el comando
+     * @param command input crudo
+     * @return mensaje en limpio
+     */
     private String getCommandMessage(String command) {
         int separatorIndex = command.indexOf(" ");
         if (separatorIndex != -1) {

@@ -13,6 +13,11 @@ public class Server {
     private final ArrayList<ClientHandler> clients = new ArrayList<>();
     private final ExecutorService pool = Executors.newFixedThreadPool(4);
 
+    /**
+     * method start el cual aranca el servidor
+     * @param port puerto que se va a usar para poner a escuchar el server
+     * @throws IOException
+     */
     public void start(int port) throws IOException {
         serverListener = new ServerSocket(port);
         while (true) {

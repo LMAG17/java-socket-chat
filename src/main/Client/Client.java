@@ -15,6 +15,11 @@ public class Client {
     public Client(IChat iChat) {
         chat = iChat;
     }
+
+    /**
+     * Inicia la conexion con el server
+     * @param nickname nombre por el cual sera identificado hacia el server
+     */
     public void startConnection(String nickname) {
         try {
             Socket clientSocket = new Socket("127.0.0.1", 9999);
@@ -44,6 +49,10 @@ public class Client {
         }
     }
 
+    /**
+     * Envia un mensaje al server
+     * @param message String del mensaje
+     */
     public void sendMessage(String message) {
         try {
             out.println("/all " + message);

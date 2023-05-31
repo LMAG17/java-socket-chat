@@ -13,12 +13,20 @@ public class Chat implements IChat {
     JPanel messageContainer = new JPanel();
     JTextField messageInput = new JTextField();
     Client client;
+
+    /**
+     * Crea el panel contenedor del chat
+     * @param nickName recibe el nombre recuperado en la pantalla anterior
+     */
     public void createChatWindow(String nickName) {
         showUI();
         client = new Client(this);
         client.startConnection(nickName);
     }
 
+    /**
+     * Configura la ventana que va a mostrar el chat
+     */
     public void setFrame() {
         frame.add(window);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,12 +36,18 @@ public class Chat implements IChat {
         frame.setVisible(true);
     }
 
+    /**
+     * Configura la ventana contenedora del chat y hud de mensajes
+     */
     public void setWindow() {
         window.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
         window.setLayout(new GridLayout(0, 1));
         window.add(new JLabel("Servido poli"));
     }
 
+    /**
+     * Configura la visual que mostrara los mensajes entrantes
+     */
     public void setChatContainer() {
         chatContainer.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
         chatContainer.setLayout(new GridLayout(0, 1));
@@ -41,6 +55,9 @@ public class Chat implements IChat {
         window.add(chatContainer);
     }
 
+    /**
+     * Configura la visual que mostrara el hud para enviar los mensajes
+     */
     public void setMessageContainer() {
         messageContainer.setLayout(new GridLayout(1, 2));
         JButton button = new JButton("Enviar");
@@ -53,6 +70,9 @@ public class Chat implements IChat {
         window.add(messageContainer);
     }
 
+    /**
+     * lanza cada uno de los metodos que configuran y muestran la interfaz
+     */
     public void showUI() {
         setWindow();
         setChatContainer();
@@ -60,6 +80,10 @@ public class Chat implements IChat {
         setFrame();
     }
 
+    /**
+     * Escucha los mensajes recibidos por el servidor
+     * @param message mensaje recibido
+     */
     @Override
     public void onMessage(String message) {
         chatContainer.setVisible(false);

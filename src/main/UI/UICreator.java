@@ -5,15 +5,18 @@ import java.awt.*;
 
 public class UICreator {
     JPanel window = new JPanel();
-    JPanel header = new JPanel();
+    JPanel container = new JPanel();
     JFrame frame = new JFrame();
 
-    public void setHeader() {
-        header.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
-        header.setLayout(new GridLayout(0, 3));
-        header.add(new JLabel("Apodo"));
+    /**
+     * Configura el contenedor de la visual que permite ingrsar usuarios al server
+     */
+    public void setContainer() {
+        container.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
+        container.setLayout(new GridLayout(0, 3));
+        container.add(new JLabel("Apodo"));
         JTextField nameTextField = new JTextField();
-        header.add(nameTextField);
+        container.add(nameTextField);
         JButton button = new JButton("Unirse al server");
         button.addActionListener(e -> {
             new Thread(() -> {
@@ -21,16 +24,22 @@ public class UICreator {
                 chat.createChatWindow(nameTextField.getText());
             }).start();
         });
-        header.add(button,2,2);
-        window.add(header);
+        container.add(button,2,2);
+        window.add(container);
     }
 
+    /**
+     * Configura el panel que contiene el programa
+     */
     public void setWindow() {
         window.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         window.setLayout(new GridLayout(0, 1));
         window.add(new JLabel("Servidor poli"));
     }
 
+    /**
+     * Muestra el programa en una ventana
+     */
     public void setFrame() {
         frame.add(window);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,9 +49,12 @@ public class UICreator {
         frame.setVisible(true);
     }
 
+    /**
+     * Orquesta la configuracion y lanzamiento de la interfaz de usuario
+     */
     public void showUI() {
         setWindow();
-        setHeader();
+        setContainer();
         setFrame();
     }
 
